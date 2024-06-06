@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@douyinfe/semi-icons-lab": "^2.59.1",
+    "@douyinfe/semi-ui": "^2.59.1",
+    "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.3"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
