@@ -8,18 +8,87 @@ import {
     IconHistogram,
     IconHome,
     IconInfoCircle,
+    IconSun
 } from "@douyinfe/semi-icons";
-import {IconFaq} from "@douyinfe/semi-icons-lab";
+import {IconDarkMode, IconFaq} from "@douyinfe/semi-icons-lab";
 import Link from "next/link";
+import { initVChartSemiTheme } from '@visactor/vchart-semi-theme';
+import {useState} from "react";
+import { usePathname } from 'next/navigation'
 
 
 export default function RootLayout({children}) {
     const {Header, Footer, Sider, Content} = Layout;
-    const commonStyle = {
-        height: 64,
-        lineHeight: '64px',
-        background: 'var(--semi-color-fill-0)'
+    const [mode, setMode] = useState('light');
+
+    const switchMode = () => {
+        const body = document.body;
+        if (body.hasAttribute('theme-mode')) {
+            body.removeAttribute('theme-mode');
+            setMode('light')
+        } else {
+            body.setAttribute('theme-mode', 'dark');
+            setMode('dark')
+        }
     };
+
+     const ChangeModeSwitch = ({mode}) => {
+        if (mode === 'dark') {
+            return (
+                <Button
+                    theme="borderless"
+                    icon={<IconSun size="large"/>}
+                    style={{
+                        color: 'var(--semi-color-text-2)',
+                        marginRight: '12px',
+                    }}
+                    onClick={switchMode}
+                />
+            )
+        } else {
+            return (
+                <Button
+                    theme="borderless"
+                    icon={<IconDarkMode size="large"/>}
+                    style={{
+                        color: 'var(--semi-color-text-2)',
+                        marginRight: '12px',
+                    }}
+                    onClick={switchMode}
+                />
+            )
+        }
+    }
+
+    const getRouteName = (pathname) => {
+        if (!pathname){
+            return "Home"
+        }
+        // 使用split方法分割路径，并取第二个部分作为路由名称
+        const routeName = pathname.split('/')[1];
+        if (routeName === 'vis'){
+            return "Vis"
+        } else if (routeName === 'about'){
+            return "About"
+        } else {
+            return "Home"
+        }
+    }
+
+    const [now_route, setNow_route] = useState(getRouteName(usePathname()));
+    const setNowRoute = (props) => {
+         setNow_route(props.itemKey)
+    }
+
+    // initVChartSemiTheme({
+    //     /** 初始亮暗色模式 */
+    //     defaultMode: 'light',
+    //     /** 是否监听亮暗色模式自动更改图表主题，默认为 true */
+    //     isWatchingMode: true,
+    //     /** 是否监听主题变化自动更改图表主题，默认为 false（适用于 semi 官方主题切换接口：https://semi.design/dsm/install_switcher）*/
+    //     isWatchingThemeSwitch: true,
+    // });
+
     return (
         <html lang="en">
         <head>
@@ -51,6 +120,7 @@ export default function RootLayout({children}) {
                         );
                     }} // 自定义渲染，使用nextjs的link
                     defaultSelectedKeys={['Home']}
+                    selectedKeys={[now_route]}
                     style={{maxWidth: 220, height: '100%'}}
                     items={[
                         {itemKey: 'Home', text: '首页', icon: <IconHome size="large"/>},
@@ -64,6 +134,7 @@ export default function RootLayout({children}) {
                     footer={{
                         collapseButton: true,
                     }}
+                    onClick={setNowRoute}
                 />
             </Sider>
             <Layout>
@@ -73,6 +144,7 @@ export default function RootLayout({children}) {
                         style={{height: '100%'}}
                         footer={
                             <>
+                                <ChangeModeSwitch mode={mode}/>
                                 <Button
                                     theme="borderless"
                                     icon={<IconBell size="large"/>}
@@ -81,16 +153,8 @@ export default function RootLayout({children}) {
                                         marginRight: '12px',
                                     }}
                                 />
-                                <Button
-                                    theme="borderless"
-                                    icon={<IconHelpCircle size="large"/>}
-                                    style={{
-                                        color: 'var(--semi-color-text-2)',
-                                        marginRight: '12px',
-                                    }}
-                                />
                                 <Avatar color="orange" size="small">
-                                    YJ
+                                    SU
                                 </Avatar>
                             </>
                         }

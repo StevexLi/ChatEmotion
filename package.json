@@ -11,6 +11,8 @@
   "dependencies": {
     "@douyinfe/semi-icons-lab": "^2.59.1",
     "@douyinfe/semi-ui": "^2.59.1",
+    "@visactor/react-vchart": "^1.11.3",
+    "@visactor/vchart-semi-theme": "^1.11.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
