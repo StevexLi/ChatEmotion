@@ -49,7 +49,7 @@ export default function RootLayout({children}) {
                                 {itemElement}
                             </Link>
                         );
-                    }}
+                    }} // 自定义渲染，使用nextjs的link
                     defaultSelectedKeys={['Home']}
                     style={{maxWidth: 220, height: '100%'}}
                     items={[
@@ -60,7 +60,6 @@ export default function RootLayout({children}) {
                     header={{
                         logo: <IconFaq style={{fontSize: 36}}/>,
                         text: 'ChatEmotion\n信情',
-
                     }}
                     footer={{
                         collapseButton: true,
@@ -109,7 +108,7 @@ export default function RootLayout({children}) {
                             border: '1px solid var(--semi-color-border)',
                             height: '100%',
                             padding: '32px',
-                            overflowY: 'scroll',
+                            overflow: 'scroll',
                             maxHeight: 'calc(100vh - 146px)',
                         }}
                         className={'semi-light-scrollbar'}
