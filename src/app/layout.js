@@ -8,11 +8,11 @@ import {
     IconHistogram,
     IconHome,
     IconInfoCircle,
-    IconSun
+    IconSun,
+    IconCustomerSupport,
 } from "@douyinfe/semi-icons";
 import {IconDarkMode, IconFaq} from "@douyinfe/semi-icons-lab";
 import Link from "next/link";
-import { initVChartSemiTheme } from '@visactor/vchart-semi-theme';
 import {useState} from "react";
 import { usePathname } from 'next/navigation'
 
@@ -80,15 +80,6 @@ export default function RootLayout({children}) {
          setNow_route(props.itemKey)
     }
 
-    // initVChartSemiTheme({
-    //     /** 初始亮暗色模式 */
-    //     defaultMode: 'light',
-    //     /** 是否监听亮暗色模式自动更改图表主题，默认为 true */
-    //     isWatchingMode: true,
-    //     /** 是否监听主题变化自动更改图表主题，默认为 false（适用于 semi 官方主题切换接口：https://semi.design/dsm/install_switcher）*/
-    //     isWatchingThemeSwitch: true,
-    // });
-
     return (
         <html lang="en">
         <head>
@@ -109,6 +100,7 @@ export default function RootLayout({children}) {
                             Home: "/",
                             Vis: "/vis",
                             About: "/about",
+                            Test: "/vis/37f382c7-52c5-4ce1-afd3-08be6dfa6d8e"
                         };
                         return (
                             <Link
@@ -126,6 +118,7 @@ export default function RootLayout({children}) {
                         {itemKey: 'Home', text: '首页', icon: <IconHome size="large"/>},
                         {itemKey: 'Vis', text: '聊天记录可视化', icon: <IconHistogram size="large"/>},
                         {itemKey: 'About', text: '关于', icon: <IconInfoCircle size="large"/>},
+                        {itemKey: 'Test', text: 'test', icon: <IconInfoCircle size="large"/>},
                     ]}
                     header={{
                         logo: <IconFaq style={{fontSize: 36}}/>,
@@ -204,6 +197,7 @@ export default function RootLayout({children}) {
                         display: 'flex',
                         alignItems: 'center',
                     }}>
+                        <IconCustomerSupport style={{marginRight: '4px'}}/>
                         <span>反馈建议</span>
                     </span>
                 </Footer>

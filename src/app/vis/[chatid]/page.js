@@ -11,6 +11,7 @@ import {initVChartSemiTheme} from "@visactor/vchart-semi-theme";
 import HourChatDistributionGraph from "@/app/vis/[chatid]/hourChatDistributionGraph";
 import DailyChatDistributionGraph from "@/app/vis/[chatid]/dailyChatDistributionGraph";
 import HeatMap from "@/app/vis/[chatid]/heatMap";
+import MonthlyChatDistributionGraph from "@/app/vis/[chatid]/monthlyChatDistribution";
 
 
 export default function Page({params}) {
@@ -21,23 +22,29 @@ export default function Page({params}) {
     console.log(data);
 
     const placeholder = (
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '25vw'}}>
-            <Skeleton.Button style={{width:'61%', marginBottom:'10px'}}/>
-            <Skeleton.Paragraph style={{width:'100%',marginBottom: '5px'}} rows={1}/>
-            <Skeleton.Paragraph style={{width:'40%',marginBottom: '10px'}} rows={1}/>
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '25vw'
+        }}>
+            <Skeleton.Button style={{width: '61%', marginBottom: '10px'}}/>
+            <Skeleton.Paragraph style={{width: '100%', marginBottom: '5px'}} rows={1}/>
+            <Skeleton.Paragraph style={{width: '40%', marginBottom: '10px'}} rows={1}/>
         </div>
     );
 
     const placeholder1 = (
         <div>
-            <Skeleton.Image style={{ width: '100%', height: 150 }} />
-            <Skeleton.Title style={{ width: '30%', marginTop: 10 , marginBottom: 10 }} />
+            <Skeleton.Image style={{width: '100%', height: 150}}/>
+            <Skeleton.Title style={{width: '30%', marginTop: 10, marginBottom: 10}}/>
         </div>
     );
     const placeholder2 = (
         <div>
-            <Skeleton.Image style={{ width: '100%', height: 344 }} />
-            <Skeleton.Title style={{ width: '30%', marginTop: 10 , marginBottom: 10 }} />
+            <Skeleton.Image style={{width: '100%', height: 344}}/>
+            <Skeleton.Title style={{width: '30%', marginTop: 10, marginBottom: 10}}/>
         </div>
     );
 
@@ -54,12 +61,14 @@ export default function Page({params}) {
                         <Col span={12}>
                             <Row>
                                 <Col span={24}>
-                                    <Skeleton placeholder={placeholder1} loading={true} style={{textAlign: 'center'}} active>
+                                    <Skeleton placeholder={placeholder1} loading={true} style={{textAlign: 'center'}}
+                                              active>
                                     </Skeleton>
                                 </Col>
                             </Row>
                             <Row>
-                                <Skeleton placeholder={placeholder1} loading={true} style={{textAlign: 'center'}} active>
+                                <Skeleton placeholder={placeholder1} loading={true} style={{textAlign: 'center'}}
+                                          active>
                                 </Skeleton>
                             </Row>
                         </Col>
@@ -90,9 +99,10 @@ export default function Page({params}) {
             </div>
             <div className={'grid'}>
                 <Row>
-                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part1: 聊天时段分析</Title></Col>
+                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part1:
+                        聊天时段分析</Title></Col>
                 </Row>
-                <Row gutter={20}>
+                <Row gutter={0}>
                     <Col span={12}>
                         <Row>
                             <div style={{height: 440}}>
@@ -113,6 +123,19 @@ export default function Page({params}) {
                         <div style={{height: 880}}>
                             <VChart
                                 spec={HeatMap(data[2])}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part2:
+                        聊天频率分析</Title></Col>
+                </Row>
+                <Row gutter={0}>
+                    <Col span={24}>
+                        <div style={{height: 440}}>
+                            <VChart
+                                spec={MonthlyChatDistributionGraph(data[3], data[4])}
                             />
                         </div>
                     </Col>

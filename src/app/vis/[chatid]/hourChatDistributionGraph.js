@@ -88,25 +88,25 @@ export default function HourChatDistributionGraph(raw_data) {
     }
 
     // 条形图
-    const commonSpec1 = {
-        type: 'bar',
-        data: [
-            {
-                id: 'barData',
-                values: chat_data,
-            }
-        ],
-        title: {
-            visible: true,
-            text: '单日聊天分布',
-        },
-        // legends: {
-        //     visible: true,
-        // },
-        xField: 'time',
-        yField: 'messages',
-        seriesField: 'type',
-    };
+    // const commonSpec1 = {
+    //     type: 'bar',
+    //     data: [
+    //         {
+    //             id: 'barData',
+    //             values: chat_data,
+    //         }
+    //     ],
+    //     title: {
+    //         visible: true,
+    //         text: '单日聊天分布',
+    //     },
+    //     // legends: {
+    //     //     visible: true,
+    //     // },
+    //     xField: 'time',
+    //     yField: 'messages',
+    //     seriesField: 'type',
+    // };
 
 
     return (

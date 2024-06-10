@@ -26,11 +26,11 @@ async function get1Data(api, uid) {
 
 
 export default async function getData(uid) {
-    const apis = ["hour_chat","daily_chat","heat_map"];
+    const apis = ["hour_chat","daily_chat","heat_map","monthly_total","monthly_person"];
     const data = [];
     for (let i=0;i<apis.length;i++){
         data.push(get1Data(apis[i],uid))
     }
-    const [hour_chat, daily_chat,heat_map] = await Promise.all(data)
-    return [hour_chat, daily_chat, heat_map]
+    const [hour_chat, daily_chat,heat_map, monthly_total, monthly_person] = await Promise.all(data)
+    return [hour_chat, daily_chat, heat_map, monthly_total, monthly_person]
 }
