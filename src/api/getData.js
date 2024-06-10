@@ -3,8 +3,6 @@
 import {NextResponse} from "next/server";
 
 async function get1Data(api, uid) {
-    console.log(api,uid)
-
     const res = await fetch(`http://8.130.25.189:8080/analysis/${api}?uuid=${uid}`,
         {headers: {
                 'Access-Control-Allow-Credentials': 'true',
@@ -17,11 +15,9 @@ async function get1Data(api, uid) {
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
 
-    // console.log(res)
 
     if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        console.log('failed to get data',uid)
+        console.log('failed to get data', api, uid)
         throw new Error('Failed to fetch data')
     }
     // console.log(res)
@@ -32,7 +28,6 @@ async function get1Data(api, uid) {
 export default async function getData(uid) {
     const apis = ["hour_chat","daily_chat","heat_map"];
     const data = [];
-    console.log('uid:',uid)
     for (let i=0;i<apis.length;i++){
         data.push(get1Data(apis[i],uid))
     }

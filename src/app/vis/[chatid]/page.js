@@ -6,21 +6,19 @@ import {
 import React from 'react';
 import {useRecoilValue} from "recoil";
 import {chatData} from "@/recoil/chatData";
+import {VChart} from "@visactor/react-vchart";
+import {initVChartSemiTheme} from "@visactor/vchart-semi-theme";
+import HourChatDistributionGraph from "@/app/vis/[chatid]/hourChatDistributionGraph";
+import DailyChatDistributionGraph from "@/app/vis/[chatid]/dailyChatDistributionGraph";
+import HeatMap from "@/app/vis/[chatid]/heatMap";
 
 
 export default function Page({params}) {
     const {Title, Text} = Typography;
     const data = useRecoilValue(chatData)
-    console.log(1)
+    console.log('page.js')
     console.log(params)
     console.log(data);
-    const skeleton_style = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        marginBottom: '10px',
-    };
 
     const placeholder = (
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '25vw'}}>
@@ -42,6 +40,7 @@ export default function Page({params}) {
             <Skeleton.Title style={{ width: '30%', marginTop: 10 , marginBottom: 10 }} />
         </div>
     );
+
 
     if (!data) {
         return (
@@ -74,6 +73,13 @@ export default function Page({params}) {
         );
     }
 
+    initVChartSemiTheme({
+        /** 是否监听亮暗色模式自动更改图表主题，默认为 true */
+        isWatchingMode: true,
+        /** 是否监听主题变化自动更改图表主题，默认为 false（适用于 semi 官方主题切换接口：https://semi.design/dsm/install_switcher）*/
+        isWatchingThemeSwitch: true,
+    });
+
     return (
         <div>
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
@@ -84,22 +90,31 @@ export default function Page({params}) {
             </div>
             <div className={'grid'}>
                 <Row>
-                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part1: Daily Chat
-                        Distribution</Title></Col>
+                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part1: 聊天时段分析</Title></Col>
                 </Row>
-                <Row>
+                <Row gutter={20}>
                     <Col span={12}>
                         <Row>
-                            <Title heading={2} style={{margin: '8px 0'}} underline>Part1: Daily Chat
-                                Distribution</Title>
+                            <div style={{height: 440}}>
+                                <VChart
+                                    spec={HourChatDistributionGraph(data[0])}
+                                />
+                            </div>
                         </Row>
                         <Row>
-                            <Title heading={2} style={{margin: '8px 0'}} underline>Part1: Daily Chat
-                                Distribution</Title>
+                            <div style={{height: 440}}>
+                                <VChart
+                                    spec={DailyChatDistributionGraph(data[1])}
+                                />
+                            </div>
                         </Row>
                     </Col>
                     <Col span={12}>
-                        <Title heading={2} style={{margin: '8px 0'}} underline>Part1: Daily Chat Distribution</Title>
+                        <div style={{height: 880}}>
+                            <VChart
+                                spec={HeatMap(data[2])}
+                            />
+                        </div>
                     </Col>
                 </Row>
             </div>
