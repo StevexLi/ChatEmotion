@@ -1,10 +1,9 @@
 'use client'
 
-import {Avatar, Breadcrumb, Button, Layout, Nav, Skeleton} from "@douyinfe/semi-ui";
+import {Avatar, Button, Layout, Nav} from "@douyinfe/semi-ui";
 import {
     IconBell,
     IconBytedanceLogo,
-    IconHelpCircle,
     IconHistogram,
     IconHome,
     IconInfoCircle,
@@ -14,7 +13,7 @@ import {
 import {IconDarkMode, IconFaq} from "@douyinfe/semi-icons-lab";
 import Link from "next/link";
 import {useState} from "react";
-import { usePathname } from 'next/navigation'
+import {usePathname} from 'next/navigation'
 
 
 export default function RootLayout({children}) {
@@ -32,7 +31,7 @@ export default function RootLayout({children}) {
         }
     };
 
-     const ChangeModeSwitch = ({mode}) => {
+    const ChangeModeSwitch = ({mode}) => {
         if (mode === 'dark') {
             return (
                 <Button
@@ -61,14 +60,14 @@ export default function RootLayout({children}) {
     }
 
     const getRouteName = (pathname) => {
-        if (!pathname){
+        if (!pathname) {
             return "Home"
         }
         // 使用split方法分割路径，并取第二个部分作为路由名称
         const routeName = pathname.split('/')[1];
-        if (routeName === 'vis'){
+        if (routeName === 'vis') {
             return "Vis"
-        } else if (routeName === 'about'){
+        } else if (routeName === 'about') {
             return "About"
         } else {
             return "Home"
@@ -77,7 +76,7 @@ export default function RootLayout({children}) {
 
     const [now_route, setNow_route] = useState(getRouteName(usePathname()));
     const setNowRoute = (props) => {
-         setNow_route(props.itemKey)
+        setNow_route(props.itemKey)
     }
 
     return (
@@ -100,7 +99,7 @@ export default function RootLayout({children}) {
                             Home: "/",
                             Vis: "/vis",
                             About: "/about",
-                            Test: "/vis/37f382c7-52c5-4ce1-afd3-08be6dfa6d8e"
+                            Test: "/vis/dc965d27-8aa3-41b8-b1d3-9ae6666f926d"
                         };
                         return (
                             <Link
@@ -118,7 +117,7 @@ export default function RootLayout({children}) {
                         {itemKey: 'Home', text: '首页', icon: <IconHome size="large"/>},
                         {itemKey: 'Vis', text: '聊天记录可视化', icon: <IconHistogram size="large"/>},
                         {itemKey: 'About', text: '关于', icon: <IconInfoCircle size="large"/>},
-                        {itemKey: 'Test', text: 'test', icon: <IconInfoCircle size="large"/>},
+                        // {itemKey: 'Test', text: 'test', icon: <IconInfoCircle size="large"/>},
                     ]}
                     header={{
                         logo: <IconFaq style={{fontSize: 36}}/>,
@@ -194,9 +193,9 @@ export default function RootLayout({children}) {
                     </span>
                     <span
                         style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}>
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}>
                         <IconCustomerSupport style={{marginRight: '4px'}}/>
                         <span>反馈建议</span>
                     </span>

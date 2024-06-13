@@ -1,59 +1,55 @@
 'use client'
-import {Radio, RadioGroup, Typography} from "@douyinfe/semi-ui";
-import {useCallback, useMemo, useState} from "react";
+import {Divider, Radio, RadioGroup, Typography} from "@douyinfe/semi-ui";
 import {VChart} from "@visactor/react-vchart";
-import {initVChartSemiTheme} from "@visactor/vchart-semi-theme";
+import RelativeEnthusiasmGraph from "@/app/vis/[chatid]/relativeEnthusiasmGraph";
+import {IconFaq} from "@douyinfe/semi-icons-lab";
 
 
 export default function Page() {
-    const { Title } = Typography;
-    initVChartSemiTheme({
-        // /** 初始亮暗色模式 */
-        // defaultMode: 'light',
-        /** 是否监听亮暗色模式自动更改图表主题，默认为 true */
-        isWatchingMode: true,
-        /** 是否监听主题变化自动更改图表主题，默认为 false（适用于 semi 官方主题切换接口：https://semi.design/dsm/install_switcher）*/
-        isWatchingThemeSwitch: true,
-    });
-    const commonSpec = {
-        type: 'bar',
-        data: [
-            {
-                id: 'barData',
-                values: [
-                    { type:'Date', month: 'Monday', sales: 22 },
-                    { type:'Date', month: 'Tuesday', sales: 13 },
-                    { type:'Date', month: 'Wednesday', sales: 25 },
-                    { type:'Date', month: 'Thursday', sales: 29 },
-                    { type:'Date', month: 'Friday', sales: 38 }
-                ]
-            }
-        ],
-        title: {
-            visible: true,
-            text: 'Bar chart',
-            subtext: 'This is a bar chart',
-        },
-        legends: {
-            visible: true,
-        },
-        xField: 'month',
-        yField: 'sales',
-        seriesField: 'type',
-    };
+    const {Title, Paragraph} = Typography;
 
     return (
         <div>
-            <div style={{color:'red', minHeight:'100%',display: 'flex',alignItems: 'center',justifyContent:'center'}}>
-                <Title style={{ margin: '8px 0' }} >苏云币 💗 黄霄云</Title>
+            <div style={{
+                minHeight: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column'
+            }}>
+                <Title style={{margin: '0'}}>关于ChatEmotion</Title>
+                <Divider margin='12px'>
+                    <IconFaq size="extra-large"/>
+                </Divider>
             </div>
-            <div>
-                <div style={{ height: 440 }}>
-                    <VChart
-                        spec={commonSpec}
-                    />
-                </div>
-            </div>
+            <Title heading={5}>为什么要开发ChatEmotion？</Title>
+            <Paragraph spacing="extended">
+                当然是因为数据可视化课程要求有一个小组设计。
+            </Paragraph>
+            <Paragraph spacing="extended">
+                至于为什么选择了做一个微信聊天记录的可视化软件，是因为当时苦苦找不到选题，受到网上一些帖子的启发，大家都觉得这很有趣，就做了。
+            </Paragraph>
+            <Divider margin='12px'>
+            </Divider>
+            <Title heading={5}>开发人员有谁？</Title>
+            <Paragraph spacing="extended">
+                BUAA软院的3名学生。
+            </Paragraph>
+            <Paragraph spacing="extended">
+                策划：Stevex🚀
+            </Paragraph>
+            <Paragraph spacing="extended">
+                前端：Stevex🚀、苏云鹤
+            </Paragraph>
+            <Paragraph spacing="extended">
+                后端：叶子午安
+            </Paragraph>
+            <Divider margin='12px'>
+            </Divider>
+            <Title heading={5}>版本</Title>
+            <Paragraph spacing="extended">
+                2024.6.13 v0.2
+            </Paragraph>
         </div>
     );
 }

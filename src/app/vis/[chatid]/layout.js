@@ -1,9 +1,8 @@
 "use client"
 import getData from "@/api/getData";
 import React from "react";
-import { useSetRecoilState } from 'recoil';
+import {RecoilRoot, useSetRecoilState} from 'recoil';
 import {chatData} from "@/recoil/chatData";
-import ChatDataProvider from "@/recoil/chatDataProvider";
 
 const LayoutComponent = ({children, params}) => {
     const setChatData = useSetRecoilState(chatData)
@@ -27,8 +26,8 @@ const LayoutComponent = ({children, params}) => {
 export default function Layout(props) {
 
     return (
-        <ChatDataProvider>
+        <RecoilRoot>
             <LayoutComponent {...props} />
-        </ChatDataProvider>
+        </RecoilRoot>
     )
 }

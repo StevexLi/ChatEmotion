@@ -12,6 +12,9 @@ import HourChatDistributionGraph from "@/app/vis/[chatid]/hourChatDistributionGr
 import DailyChatDistributionGraph from "@/app/vis/[chatid]/dailyChatDistributionGraph";
 import HeatMap from "@/app/vis/[chatid]/heatMap";
 import MonthlyChatDistributionGraph from "@/app/vis/[chatid]/monthlyChatDistribution";
+import AllWordCloud from "@/app/vis/[chatid]/allWordCloud";
+import WordFrequencyComponent from "@/app/vis/[chatid]/wordFrequencyComponent";
+import RelativeEnthusiasmGraph from "@/app/vis/[chatid]/relativeEnthusiasmGraph";
 
 
 export default function Page({params}) {
@@ -94,8 +97,9 @@ export default function Page({params}) {
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                 <Title style={{margin: '0 0 8px 0'}}>聊天记录分析结果📊</Title>
                 <Input prefix="ChatID: " disabled={true} defaultValue={params.chatid} style={{width: '370px'}}></Input>
+                {data[1].data[0].date} 至 {data[1].data[data[1].data.length-1].date}
                 <Text icon={<IconLink/>} copyable={{content: params.chatid}}>分享链接</Text>
-                {data[1].data[0].date}
+
             </div>
             <div className={'grid'}>
                 <Row>
@@ -140,6 +144,43 @@ export default function Page({params}) {
                         </div>
                     </Col>
                 </Row>
+                <Row>
+                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part3:
+                        聊天热门词汇</Title></Col>
+                </Row>
+                <Row gutter={0}>
+                    <Col span={24}>
+                        <div style={{height: 440}}>
+                            <VChart
+                                spec={AllWordCloud(data[5])}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+                <Row gutter={0}>
+                    <Col span={24}>
+                        <div style={{height: 440}}>
+                            <WordFrequencyComponent raw_data={data[6]}/>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}><Title heading={2} style={{margin: '8px 0'}} underline>Part4:
+                        聊天情感分析</Title></Col>
+                </Row>
+                <Row gutter={0}>
+                    <Col span={24}>
+                        <div style={{height: 440}}>
+                            <VChart
+                                spec={RelativeEnthusiasmGraph(data[3], data[4])}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                    <Title style={{margin: '0 0 8px 0'}}>还将支持更多功能...</Title>
+                    <Title style={{margin: '0'}}>请点击界面右下角告诉我们您的想法👇</Title>
+                </div>
             </div>
         </div>
     );

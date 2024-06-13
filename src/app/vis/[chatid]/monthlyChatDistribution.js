@@ -38,6 +38,9 @@ export default function MonthlyChatDistributionGraph(raw_data, raw_data2) {
         yField: 'messages',
         seriesField: 'name',
         legends: { visible: true },
+        point:{
+            visible: false,
+        }
     };
 
 
